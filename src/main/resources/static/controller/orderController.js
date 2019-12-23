@@ -48,7 +48,7 @@ app.controller("orderController", function ($scope,$http,dataFactory){
             });
     }
     
-    
+
     
  /////////////////////////////////////////////////////
     $scope.selectVehicle={};
@@ -66,7 +66,7 @@ app.controller("orderController", function ($scope,$http,dataFactory){
         if ($scope.cartProduct.length === 0) {
             $scope.cartProduct.push($scope.cp);
             $scope.finalTotal += $scope.cp.subTotal;
-            //alert("first insert");
+            
         } else if ($scope.cartProduct.length > 0) {
             for (var i = 0; i < $scope.cartProduct.length; i++) {
                 if ($scope.cartProduct[i].vid === $scope.cp.vid) {
@@ -82,8 +82,14 @@ app.controller("orderController", function ($scope,$http,dataFactory){
 
     };
     
+    $scope.getTotalAmount = function() {
+    var i=0,sum = 0;
+    	for (i=0; i < $scope.orders.length; i++) {
+    		sum += +$scope.orders[i].total;
+    	}
+    	return sum;
+    }
     
-
     $scope.removeProduct = function (product) {
     	$scope.finalTotal -= product.vprice;
         $scope.removableProduct = product;
@@ -122,8 +128,7 @@ app.controller("orderController", function ($scope,$http,dataFactory){
     	    });
 
     };
-    
-    
+
     //Delete order
     $scope.deleteOrder = function(order) {
         $http({
@@ -136,12 +141,5 @@ app.controller("orderController", function ($scope,$http,dataFactory){
 	      console.log("ERROR!");
 	    });
     }
-    
-    
-    
-    
-    
-    
-    
 
 });

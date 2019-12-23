@@ -1,10 +1,11 @@
+<div ng-controller="orderController">
 <section class="statistic">
   <div class="section__content section__content--p30">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-lg-3">
           <div class="statistic__item">
-            <h2 class="number">10,368</h2>
+            <h2 class="number">{{customers.length}}</h2>
             <span class="desc">Customers</span>
             <div class="icon">
               <i class="zmdi zmdi-account-o"></i>
@@ -13,7 +14,7 @@
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="statistic__item">
-            <h2 class="number">388,688</h2>
+            <h2 class="number">{{orders.length}}</h2>
             <span class="desc">Sales</span>
             <div class="icon">
               <i class="zmdi zmdi-file-text"></i>
@@ -22,7 +23,7 @@
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="statistic__item">
-            <h2 class="number">1,086</h2>
+            <h2 class="number">{{vehicles.length}}</h2>
             <span class="desc">Cars</span>
             <div class="icon">
               <i class="zmdi zmdi-car"></i>
@@ -31,7 +32,7 @@
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="statistic__item">
-            <h2 class="number">$1,060,386</h2>
+            <h2>{{getTotalAmount()| currency}}</h2>
             <span class="desc">Profit</span>
             <div class="icon">
               <i class="zmdi zmdi-money"></i>
@@ -42,3 +43,4 @@
     </div>
   </div>
 </section>
+</div>

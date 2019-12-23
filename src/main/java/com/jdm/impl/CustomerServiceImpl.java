@@ -19,6 +19,11 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	private CustomerRepository customerRepo;
 	
+	@Override
+	public long count() {
+		return customerRepo.count();
+	}
+	
 	public List<Customer> findAllCustomer(){	
 		return (List<Customer>) customerRepo.findAll();
 	}

@@ -27,6 +27,10 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	public long count() {
+		return customerService.count();
+	}
 
 	// List all customer
 	@GetMapping
