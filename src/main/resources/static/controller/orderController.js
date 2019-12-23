@@ -116,7 +116,7 @@ app.controller("orderController", function ($scope,$http,dataFactory){
                 'Content-Type': 'application/json'
             }	    
     	  }).then(function successCallback(response) {
-          	console.log("Successfully added");
+    		  alert("Success");
     	    }, function errorCallback(response) {
     	      console.log(response);
     	    });

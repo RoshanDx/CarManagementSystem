@@ -7,7 +7,6 @@ app.controller("customerController", function($scope, $http,dataFactory) {
 		{ id: 2,name: 'Female'}];
 
 	$scope.customerForm = {
-//			custId: -1,
 			custName:"",
 			custAddress:"",
 			custPhone:"",
@@ -72,10 +71,7 @@ app.controller("customerController", function($scope, $http,dataFactory) {
 //		};
 		
 		
-     $scope.addCustomer = function() {
-    	 
-    	 clearForm();
-            
+     $scope.addCustomer = function() {            
          var method = "";
          var url = "";
          if ($scope.customerForm.custId == "") {
