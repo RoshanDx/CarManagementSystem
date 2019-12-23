@@ -1,0 +1,81 @@
+<div ng-controller="employeeController">
+	
+<div class="col-md-12">
+  <div class="overview-wrap">
+    <i class="fa fa-search fa-2x" aria-hidden="true"></i> <input class="au-input au-input--xl " type="text" ng-model="searchBox" placeholder="Search a record">
+    <!-- <button class="au-btn au-btn-icon au-btn--green">
+      <i class="zmdi zmdi-plus"></i>add car</button> -->
+      <button class="au-btn au-btn-icon au-btn--green" data-toggle="modal" data-target="#checkoutModal">
+  <i class="zmdi zmdi-plus"></i>employee</button>
+<!-- MAIN CONTENT-->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#staticModal">
+  Static
+</button> -->
+  <!-- checkoutModal -->
+  <div id="checkoutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+		<div>      
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <input class="form-control" type="text" name="name" placeholder="Name" ng-model="employeeForm.empName">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Role</label>
+              <input class="form-control" type="text" name="role" placeholder="Role" ng-model="employeeForm.empRole">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Salary</label>
+              <input class="form-control"type="text" name="salary" placeholder="Salary" ng-model="employeeForm.empSalary">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Email</label>
+				<input class="form-control"type="email" name="email" placeholder="Email" ng-model="employeeForm.empEmail">
+            </div>
+		</div>
+
+        </div>
+        <div class="modal-footer">
+          <button data-toggle="modal" data-target="#messageModal" ng-click="addEmployee()" type="submit" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i> Confirm</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</div>
+	
+<div class="table-responsive table--no-card m-b-30">
+  <table class="table table-borderless table-striped table-earning">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+      <thead>
+      <tbody>
+        <tr ng-repeat="employee in employees|filter: searchBox">
+          <td>{{$index+1}}</td>
+          <td>{{employee.empName}}</td>
+          <td>{{employee.empRole}}</td>
+          <td>{{employee.empEmail}}</td>
+          <td>{{employee.empSalary|currency}}</td>
+          <td><button class="btn btn-primary" ng-click="updateEmployee(employee)" data-toggle="modal" data-target="#checkoutModal">Update</button>&nbsp
+            <button class="btn btn-danger" ng-click="deleteEmployee(employee)">Delete</button></td>
+
+        </tr>
+    <tbody>
+  </table>
+  <br>
+</div>
+</div>

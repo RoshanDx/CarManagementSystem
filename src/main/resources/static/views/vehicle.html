@@ -1,0 +1,114 @@
+<div ng-controller="vehicleController">
+
+<div class="col-md-12">
+  <div class="overview-wrap">
+    <i class="fa fa-search fa-2x" aria-hidden="true"></i> <input class="au-input au-input--xl " type="text" ng-model="searchBox" placeholder="Search a record">
+    <!-- <button class="au-btn au-btn-icon au-btn--green">
+      <i class="zmdi zmdi-plus"></i>add car</button> -->
+      <button class="au-btn au-btn-icon au-btn--green" data-toggle="modal" data-target="#checkoutModal">
+  <i class="zmdi zmdi-plus"></i>employee</button>
+<!-- MAIN CONTENT-->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#staticModal">
+  Static
+</button> -->
+  <!-- checkoutModal -->
+  <div id="checkoutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+	<div>     
+            <div class="form-group">
+              <label class="form-control-label">Manufacturer</label>
+              <input class="form-control" type="text" name="manufacturer" placeholder="Manufacturer" ng-model="vehicleForm.vmanufacturer">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Model</label>
+              <input class="form-control" type="text" name="model" placeholder="Model" ng-model="vehicleForm.vmodel">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Year</label>
+              <input class="form-control"type="text" name="year" placeholder="Year" ng-model="vehicleForm.vyear">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Mileage</label>
+				<input class="form-control"type="text" name="milleage" placeholder="Milleage" ng-model="vehicleForm.vmilleage">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Plate</label>
+				<input class="form-control"type="text" name="plate" placeholder="Plate" ng-model="vehicleForm.vplate">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Transmission</label>
+              <select class="form-control" ng-model="vehicleForm.vtransmission">
+              	<option value="">Transmission</option>
+                <option ng-repeat="trans in transmission" value="{{trans.name}}">{{trans.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Color</label>
+				<input class="form-control"type="text" name="color" placeholder="Color" ng-model="vehicleForm.vcolor">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Category</label>
+              <select class="form-control" ng-model="vehicleForm.vcategory">
+              	<option value="">Category</option>
+                <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Price</label>
+				<input class="form-control"type="text" name="price" placeholder="Price" ng-model="vehicleForm.vprice">
+            </div>                                                
+	</div>
+        </div>
+        <div class="modal-footer">
+          <button data-toggle="modal" data-target="#messageModal" ng-click="addVehicle()" type="submit" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i> Confirm</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="table-responsive table--no-card m-b-30">
+  <table class="table table-borderless table-striped table-earning">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Car</th>
+        <th>Year</th>
+        <th>Mileage</th>
+        <th>Plate</th>
+        <th>Transmission</th>
+        <th>Colour</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+      <thead>
+      <tbody>
+        <tr ng-repeat="vehicle in vehicles|filter: searchBox">
+          <td>{{$index+1}}</td>
+          <td>{{vehicle.vmanufacturer}} {{vehicle.vmodel}}</td>
+          <td>{{vehicle.vyear}}</td>
+          <td>{{vehicle.vmilleage}}</td>
+          <td>{{vehicle.vplate}}</td>
+          <td>{{vehicle.vtransmission}}</td>
+          <td>{{vehicle.vcolor}}</td>
+          <td>{{vehicle.vcategory}}</td>
+          <td>{{vehicle.vprice|currency}}</td>
+          <td><button class="btn btn-primary" ng-click="updateVehicle(vehicle)" data-toggle="modal" data-target="#checkoutModal">Update</button>&nbsp
+            <button class="btn btn-danger" ng-click="deleteVehicle(vehicle)">Delete</button></td>
+        </tr>
+    <tbody>
+  </table>
+  <br>
+</div>	
+
+</div>

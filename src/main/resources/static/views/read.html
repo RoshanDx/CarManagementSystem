@@ -1,0 +1,41 @@
+
+<div class="col-md-12">
+  <div class="overview-wrap">
+    <i class="fa fa-search fa-2x" aria-hidden="true"></i> <input class="au-input au-input--xl " type="text" ng-model="searchBox" placeholder="Search a record">
+    <!-- <button class="au-btn au-btn-icon au-btn--green">
+      <i class="zmdi zmdi-plus"></i>add car</button> -->
+      <ng-include src="'modal.html'"></ng-include>
+  </div>
+</div>
+<div class="table-responsive table--no-card m-b-30" ng-controller="MyController">
+  <table class="table table-borderless table-striped table-earning">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Plate</th>
+        <th>Quality</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <thead>
+      <tbody>
+        <tr ng-repeat="x in DetailArray| orderBy : 'manufacturer' | filter: searchBox">
+          <td>{{$index + 1}}</td>
+          <td>{{x.manufacturer}}</td>
+          <td>{{x.model}}</td>
+          <td>{{x.plate}}</td>
+          <td>{{x.quality}}</td>
+          <td>{{x.price | currency}}</td>
+          <td>{{x.status}}</td>
+          <!-- <td ng-repeat = "q in x.quality">Rating: {{q.rating}}</td> -->
+          <td><button class="btn btn-primary" ng-click="updateItem()">Update</button>&nbsp
+            <button class="btn btn-danger" ng-click="deleteItem(x)">Delete</button>
+        </tr>
+    <tbody>
+  </table>
+  <br>
+  <!-- <ng-include src="'addForm.html'"></ng-include> -->
+</div>

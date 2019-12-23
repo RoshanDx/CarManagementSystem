@@ -1,0 +1,191 @@
+<div ng-controller="orderController">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" style="height: 33rem;">
+        <div class="card-header">
+          <strong class="card-title">Select Car</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-control-label">Car</label>
+            <select class="form-control" name="plate" ng-model=selectVehicle ng-options="v.vmanufacturer + ' ' + v.vmodel + ' '+ v.vplate  for v in vehicles">
+              <option value="">Select</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Vehicle ID</label>
+            <input class="form-control" type="text" name="id" placeholder="ID" ng-model="selectVehicle.vid" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Manufacturer</label>
+            <input class="form-control" type="text" name="manufacturer" placeholder="Manufacturer" ng-model="selectVehicle.vmanufacturer" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Model</label>
+            <input class="form-control" type="text" name="model" placeholder="Model" ng-model="selectVehicle.vmodel" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Price</label>
+            <input class="form-control" type="text" name="price" placeholder="Price" ng-model="selectVehicle.vprice" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" style="height: 33rem;">
+        <div class="card-header">
+          <strong class="card-title">Select Customer</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-control-label">Name</label>
+            <select class="form-control" name="name" ng-model=selectCustomerName ng-options="c.custName for c in customers">
+              <option value="">Select</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Customer ID</label>
+            <input class="form-control" type="text" name="custId" ng-model="selectCustomerName.custId" placeholder="ID" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Address</label>
+            <input class="form-control" type="text" name="address" placeholder="Address" ng-model="selectCustomerName.custAddress" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Phone</label>
+            <input class="form-control" type="text" name="phone" placeholder="Phone" ng-model="selectCustomerName.custPhone" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Email</label>
+            <input class="form-control" type="email" name="email" placeholder="Email" ng-model="selectCustomerName.custEmail" readonly>
+          </div>          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="height: 33rem;">
+        <div class="card-header">
+          <strong class="card-title">Order Details</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-control-label">Date</label>
+            <input class="form-control" type="date" name="name" ng-model="date">
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Employee</label>
+            <select class="form-control" name="employeeName" ng-model=selectEmployee ng-options="e.empName for e in employees">
+              <option value="">Select</option>
+            </select>
+          </div><br>
+          <button style="float: right;" ng-click="addToCart()" type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive table--no-card m-b-30">
+    <table class="table table-bordered table-striped table-earning">
+      <thead>
+        <tr >
+          <th>No</th>
+          <th>Car</th>
+          <th>Price</th>
+          <th>Action</th>
+          <th>Total</th>
+        </tr>
+        <thead>
+        <tbody ng-repeat="product in cartProduct">
+          <tr>
+            <td>{{product.vid}}</td>
+            <td>{{product.vmanufacturer}} {{product.vmodel}}</td>
+            <td>{{product.vprice}}</td>
+            <td><button ng-click="removeProduct(product)" class="btn btn-danger"><i class="fa fa-remove"></i> Remove</button></td>
+			<td style="text-align: center">{{product.subTotal|currency}}</td>     
+          </tr>
+      </tbody>
+      <tfoot>
+        <tr ng-show="cartProduct.length != 0">
+          <td colspan="4" style="text-align: right">Final Total:</td>
+          <td style="text-align: center">{{finalTotal|currency}}</td>
+        </tr>
+        <tr ng-show="cartProduct.length != 0">
+          <td colspan="6" style="text-align: right">
+            <button data-toggle="modal" data-target="#checkoutModal" type="button" ng-show="cartProduct.length != 0" class="btn btn-success">
+              <i class="fa fa-check"></i> Check Out</button></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  
+  <div>
+  
+  </div>
+  
+  <!-- checkoutModal -->
+  <div id="checkoutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" align="center">Review Your Order</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered table-striped">
+            <tr>
+              <td>Employee Name</td>
+              <td>{{selectEmployee.empName}}</td>
+            </tr>
+            <tr>
+              <td>Customer Name</td>
+              <td>{{selectCustomerName.custName}}</td>
+            </tr>
+            <tr>
+              <td>Order Date</td>
+              <td>{{date | date}}</td>
+            </tr>
+            <tr>
+              <td>Total Amount</td>
+              <td>{{finalTotal|currency}}</td>
+            </tr>
+          </table>
+          <br />
+          <br />
+          <br />
+          Order Details: <br/><br/>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Car Name</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="product in cartProduct">
+                <td>{{product.vid}}</td>
+                <td>{{product.vmanufacturer}} {{product.vmodel}}</td>
+                <td>{{product.vprice}}</td>
+                <td style="text-align: center">{{product.subTotal|currency}}</td>
+              </tr>
+            </tbody>
+		<tfoot>
+        <tr ng-show="cartProduct.length != 0">
+          <td colspan="3" style="text-align: right">Final Total:</td>
+          <td style="text-align: center">{{finalTotal|currency}}</td>
+        </tr>
+      </tfoot>                   
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button data-toggle="modal" data-target="#messageModal" ng-click="checkOut()" type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i> Confirm</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div> 
+</div>

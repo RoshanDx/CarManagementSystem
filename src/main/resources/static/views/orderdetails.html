@@ -1,0 +1,29 @@
+<div ng-controller="orderController">
+<div class="col-md-12">  
+  <i class="fa fa-search fa-2x" aria-hidden="true">&nbsp&nbsp</i><input class="au-input au-input--xl " type="text" ng-model="searchBox" placeholder="Search a record">
+   </div><br>
+   <div class="table-responsive table--no-card m-b-30">
+    <table class="table table-bordered table-striped table-earning">
+      <thead>
+        <tr >
+          <th>OrderNo</th>
+          <th>Customer</th>
+          <th>Vehicle (Plate Number)</th>
+          <th>Total</th>
+		  <th>Action</th>
+        </tr>
+        <thead>
+        <tbody ng-repeat="order in orders|filter:searchBox">
+          <tr>
+            <td>{{order.oid}}</td>
+            <td>{{order.customer.custName}}</td>
+            <td>
+            <li ng-repeat="v in order.vehicles" type="1"> {{v.vmanufacturer}} {{v.vmodel}} {{v.vplate}}</li>
+            </td>
+			<td>{{order.total|currency}}</td> 
+          <td><button ng-click="deleteOrder(order)" class="btn btn-danger"><i class="fa fa-remove"></i> Remove</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
